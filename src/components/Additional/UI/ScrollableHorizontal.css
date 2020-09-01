@@ -1,0 +1,54 @@
+.scroll-many {
+    position: relative;
+}
+
+.scroll-many-items {
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -ms-autohiding-scrollbar: none;
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroll-many-items::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-many-item {
+    margin: 0 25px;
+}
+
+.scroll-many-item h5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-width: 70px;
+    width: 100%;
+}
+
+.scroll-many-img {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.scroll-many-control {
+    position: absolute;
+    top: 45%;
+}
+
+.scroll-many-control.left {
+    left: 0;
+}
+
+.scroll-many-control.right {
+    right: 0;
+}
+
+.scroll-many-control.left:active,
+.scroll-many-control.right:active {
+    color: grey;
+}

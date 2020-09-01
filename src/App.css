@@ -1,38 +1,38 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&display=swap");
+
+body {
+	font-family: "Quattrocento", serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.border {
+	border: 1px solid #ccc !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content {
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.data {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.fade-appear {
+	opacity: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.fade-appear-active {
+	opacity: 1;
+	transition: opacity 500ms;
+}
+
+.fade-exit {
+	opacity: 1;
+}
+
+.fade-exit-active {
+	opacity: 0;
+	transition: opacity 500ms;
 }
