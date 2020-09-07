@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../Logo/Logo";
-import Links from "../Navigation/Links";
+import Links from "../Links/Links";
 
 const Footer = () => (
 	<div className="bg-secondary text-white" style={{ marginTop: 150 }}>

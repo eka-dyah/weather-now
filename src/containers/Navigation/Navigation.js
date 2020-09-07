@@ -6,8 +6,8 @@ import {
 	Collapse,
 	Container,
 } from "reactstrap";
-import Logo from "../Logo/Logo";
-import Links from "./Links";
+import Logo from "../../components/Logo/Logo";
+import Links from "../../components/Links/Links";
 
 const Navigation = () => {
 	const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import WeatherInfo from "../Additional/Weather/WeatherInfo";
-import WeatherScrollable from "../Additional/Weather/WeatherScrollable";
+import WeatherInfo from "../../components/Additional/Weather/WeatherInfo";
+import WeatherScrollable from "../../components/Additional/Weather/WeatherScrollable";
 
 const info = {
 	current: {

@@ -1,7 +1,7 @@
 import React from "react";
-import Navigation from "../Navigation/Navigation";
+import Navigation from "../../containers/Navigation/Navigation";
 import Footer from "../Footer/Footer";
-import City from "./City";
+import City from "../../containers/City/City";
 
 const Layout = (props) => (
 	<div>

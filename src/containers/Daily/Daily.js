@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import Forecast from "../Additional/Forecast/Forecast";
+import Forecast from "../../components/Additional/Forecast/Forecast";
 
 const data = {
-	dateTime: "August 21, 2020",
 	data: [
 		{
-			dateTime: "00:00 PM",
+			dateTime: "August 21, 2020",
 			weather: "Clear Sky",
 			imgSrc: "https://shorturl.at/demnX",
 			info: [
@@ -16,7 +15,7 @@ const data = {
 			],
 		},
 		{
-			dateTime: "01:00 PM",
+			dateTime: "August 22, 2020",
 			weather: "Cloudy",
 			imgSrc: "https://shorturl.at/demnX",
 			info: [
@@ -27,7 +26,7 @@ const data = {
 			],
 		},
 		{
-			dateTime: "02:00 PM",
+			dateTime: "August 23, 2020",
 			weather: "Rain",
 			imgSrc: "https://shorturl.at/demnX",
 			info: [
@@ -38,7 +37,7 @@ const data = {
 			],
 		},
 		{
-			dateTime: "02:00 PM",
+			dateTime: "August 24, 2020",
 			weather: "Clear Sky",
 			imgSrc: "https://shorturl.at/demnX",
 			info: [
@@ -51,11 +50,11 @@ const data = {
 	],
 };
 
-const Today = () => {
+const Daily = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
-	return <Forecast info={data.data} header="Today Forecast" />;
+	return <Forecast info={data.data} header="Daily Forecast" />;
 };
 
-export default Today;
+export default Daily;

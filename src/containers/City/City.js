@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 import "./City.css";
-import ModalCity from "./ModalCity";
+import ModalCity from "../../components/Additional/ModalCity";
+import Loading from "../../components/Additional/Loading";
 
-const City = () => {
-	const [city, setCity] = useState("Jakarta, Indonesia");
+const City = ({ isLoading, city, updateCity }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [input, setInput] = useState(city);
 
 	const changeCity = () => {
-		setCity(input);
+		updateCity(input);
 		toggleModal();
 	};
 	const toggleModal = () => setIsOpen(!isOpen);
@@ -25,16 +25,20 @@ const City = () => {
 				onChangeInput={onChangeInput}
 			/>
 			<div>
-				<h4 className="City">
-					{city}
-					<i
-						onClick={changeCity}
-						role="button"
-						className="fa fa-pencil ml-2"
-						aria-hidden="true"
-						style={{ fontSize: 15 }}
-					></i>
-				</h4>
+				{isLoading ? (
+					<Loading isLoading={isLoading} />
+				) : (
+					<h4 className="City">
+						{city}
+						<i
+							onClick={changeCity}
+							role="button"
+							className="fa fa-pencil ml-2"
+							aria-hidden="true"
+							style={{ fontSize: 15 }}
+						></i>
+					</h4>
+				)}
 			</div>
 		</React.Fragment>
 	);

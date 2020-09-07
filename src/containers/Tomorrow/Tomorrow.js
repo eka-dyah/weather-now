@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Forecast from "../Additional/Forecast/Forecast";
+import Forecast from "../../components/Additional/Forecast/Forecast";
 
 const data = {
 	dateTime: "August 21, 2020",
