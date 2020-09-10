@@ -9,7 +9,6 @@ export const setWeather = (weather) => {
 
 export const fetchWeather = (lat, lon) => (dispatch) => {
 	dispatch(weatherLoading(true));
-	console.log(lat, lon);
 	fetch("http://localhost:8000/current", {
 		method: "POST",
 		headers: {

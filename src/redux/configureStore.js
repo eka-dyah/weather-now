@@ -11,7 +11,6 @@ const composeEnhancers =
 		: null || compose;
 
 const loggerMiddleware = createLogger();
-console.log(locationReducer);
 
 const rootReducer = combineReducers({
 	location: locationReducer,

@@ -100,7 +100,6 @@ class City extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return {
 		city: state.location.location,
 		isLoading: state.location.loading,

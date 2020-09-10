@@ -37,7 +37,6 @@ export const setFailedLocation = (errorMessage) => {
 };
 
 export const setLocation = (location) => {
-	console.log(location);
 	return {
 		type: actionTypes.SET_LOCATION,
 		payload: location,
@@ -68,7 +67,6 @@ export const fetchUpdateLocation = (location) => (dispatch) => {
 
 export const fetchInitLocation = (location = null, ipAddress) => (dispatch) => {
 	dispatch(setLoadingLocation());
-	console.log(ipAddress, typeof ipAddress);
 	fetch("http://localhost:8000/location", {
 		method: "POST",
 		headers: {

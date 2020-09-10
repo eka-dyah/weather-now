@@ -7,7 +7,6 @@ const initialState = {
 };
 
 export const locationReducer = (state = initialState, action) => {
-	console.log(state);
 	switch (action.type) {
 		case ActionTypes.SET_LOCATION:
 			if (!action.payload) {
