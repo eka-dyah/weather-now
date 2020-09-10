@@ -12,12 +12,13 @@ const Footer = () => (
 				<Links />
 			</div>
 		</div>
-		<p
+		<div
 			className="text-center mb-0 py-2 text-white-50"
 			style={{ fontSize: 12 }}
 		>
-			Copyright 2020 Dyah Eka Lestari
-		</p>
+			<p className="mb-0">Made by Dyah Eka Lestari, 2020</p>
+			<p className="my-0">Weather data by <a className="text-white-50" target="_blank" href="https://openweathermap.org/">OpenWeather</a></p>
+		</div>
 	</div>
 );
 
