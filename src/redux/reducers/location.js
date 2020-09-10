@@ -1,14 +1,18 @@
 import * as ActionTypes from "../actions/actionTypes";
 
 const initialState = {
-	loading: false,
-	location: "",
+	loading: true,
+	location: null,
 	error: null,
 };
 
 export const locationReducer = (state = initialState, action) => {
+	console.log(state);
 	switch (action.type) {
 		case ActionTypes.SET_LOCATION:
+			if (!action.payload) {
+				return initialState;
+			}
 			return {
 				...state,
 				loading: false,
@@ -18,16 +22,18 @@ export const locationReducer = (state = initialState, action) => {
 		case ActionTypes.FETCH_LOCATION_LOADING:
 			return {
 				...state,
-				loading: true,
+				loading: action.payload,
 				error: null,
+				location: null
 			};
 		case ActionTypes.FETCH_LOCATION_FAIL:
 			return {
 				...state,
 				loading: false,
 				error: action.payload,
+				location: null
 			};
 		default:
-			break;
+			return state;
 	}
 };

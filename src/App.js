@@ -2,10 +2,10 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import Home from "./components/Home/Home";
-import Today from "./components/Today/Today";
-import Tomorrow from "./components/Tomorrow/Tomorrow";
-import Daily from "./components/Daily/Daily";
+import Home from "./containers/Home/Home";
+import Today from "./containers/Today/Today";
+import Tomorrow from "./containers/Tomorrow/Tomorrow";
+import Daily from "./containers/Daily/Daily";
 import Layout from "./components/Additional/Layout";
 
 const routes = [

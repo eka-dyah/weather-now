@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 
 import "./ScrollableHorizontal.css";
 
-const ScrollableHorizontal = ({ data }) => {
+const ScrollableHorizontal = ({ data, needMaxMin }) => {
 	const scrollItem = useRef();
 
 	const rightScrollMove = () => {
@@ -13,21 +13,37 @@ const ScrollableHorizontal = ({ data }) => {
 		scrollItem.current.scrollLeft -= scrollItem.current.clientWidth / 2;
 	};
 
-	const item = data.map((info, index) => {
+	const item = data.map((weather, index) => {
 		return (
 			<div className="scroll-many-item" key={index}>
-				<h5 className="text-center">{info.time}</h5>
+				<h5 className="text-center">
+					{weather.time12 || weather.date}
+				</h5>
 				<div className="scroll-many-img">
-					<img src={info.imgSrc} alt="weather condition" width={50} />
+					<img
+						className="weather-icon"
+						src={weather.weather.icon}
+						alt="weather condition"
+						width={50}
+					/>
 				</div>
-				<h6 className="text-center">
-					{info.min}
-					<sup>o</sup>
-				</h6>
-				<h6 className="text-center">
-					{info.max}
-					<sup>o</sup>
-				</h6>
+				{needMaxMin ? (
+					<React.Fragment>
+						<h6 className="text-center">
+							{weather.info[2].value}
+							<sup>o</sup>
+						</h6>
+						<h6 className="text-center">
+							{weather.info[3].value}
+							<sup>o</sup>
+						</h6>
+					</React.Fragment>
+				) : (
+					<h6 className="text-center">
+						{weather.info[0].value}
+						<sup>o</sup>
+					</h6>
+				)}
 			</div>
 		);
 	});
@@ -36,10 +52,7 @@ const ScrollableHorizontal = ({ data }) => {
 			<div className="scroll-many-items" ref={scrollItem}>
 				{item}
 			</div>
-			<div
-				className="scroll-many-control left"
-				onClick={leftScrollMove}
-			>
+			<div className="scroll-many-control left" onClick={leftScrollMove}>
 				<i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
 			</div>
 			<div

@@ -5,10 +5,11 @@ const Forecast = ({ header, subheader, info }) => {
 	const weatherData = info.map((property, index) => (
 		<WeatherFullData
             key={index}
-			weather={property.weather}
+			weather={property.weather.main}
+			subweather={property.weather.description}
 			info={property.info}
-			dateTime={property.dateTime}
-			imgSrc={property.imgSrc}
+			dateTime={property.time12 || property.date}
+			imgSrc={property.weather.icon}
 		/>
 	));
 

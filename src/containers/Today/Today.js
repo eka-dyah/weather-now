@@ -1,61 +1,33 @@
-import React, { useEffect } from "react";
+import React, { Component } from "react";
 import Forecast from "../../components/Additional/Forecast/Forecast";
+import { connect } from "react-redux";
+import Loading from "../../components/Additional/Loading";
 
-const data = {
-	dateTime: "August 21, 2020",
-	data: [
-		{
-			dateTime: "00:00 PM",
-			weather: "Clear Sky",
-			imgSrc: "https://shorturl.at/demnX",
-			info: [
-				{ title: "Real feel", value: "23", unit: "C" },
-				{ title: "Wind", value: "SSE 32", unit: "C" },
-				{ title: "Cloud", value: "2", unit: "%" },
-				{ title: "Humid", value: "2", unit: "%" },
-			],
-		},
-		{
-			dateTime: "01:00 PM",
-			weather: "Cloudy",
-			imgSrc: "https://shorturl.at/demnX",
-			info: [
-				{ title: "Real feel", value: "23", unit: "C" },
-				{ title: "Wind", value: "SSE 32", unit: "C" },
-				{ title: "Cloud", value: "2", unit: "%" },
-				{ title: "Humid", value: "2", unit: "%" },
-			],
-		},
-		{
-			dateTime: "02:00 PM",
-			weather: "Rain",
-			imgSrc: "https://shorturl.at/demnX",
-			info: [
-				{ title: "Real feel", value: "23", unit: "C" },
-				{ title: "Wind", value: "SSE 32", unit: "C" },
-				{ title: "Cloud", value: "2", unit: "%" },
-				{ title: "Humid", value: "2", unit: "%" },
-			],
-		},
-		{
-			dateTime: "02:00 PM",
-			weather: "Clear Sky",
-			imgSrc: "https://shorturl.at/demnX",
-			info: [
-				{ title: "Real feel", value: "23", unit: "C" },
-				{ title: "Wind", value: "SSE 32", unit: "C" },
-				{ title: "Cloud", value: "2", unit: "%" },
-				{ title: "Humid", value: "2", unit: "%" },
-			],
-		},
-	],
-};
-
-const Today = () => {
-	useEffect(() => {
+class Today extends Component {
+	componentDidMount() {
 		window.scrollTo(0, 0);
-	}, []);
-	return <Forecast info={data.data} header="Today Forecast" />;
+	}
+	render() {
+		let weather;
+		if (this.props.isLoading) {
+			weather = <Loading isLoading={this.props.isLoading} />;
+		} else if (this.props.error) {
+			weather = <h5 className="text-center">{this.props.error}</h5>;
+		} else if (this.props.hourly) {
+			weather = (
+				<Forecast info={this.props.hourly} header="Today Forecast" />
+			);
+		}
+		return <div>{weather}</div>;
+	}
+}
+
+const mapStateToProps = (state) => {
+	return {
+		hourly: state.weather.weather.hourly,
+		isLoading: state.weather.loading,
+		error: state.weather.error
+	};
 };
 
-export default Today;
+export default connect(mapStateToProps)(Today);

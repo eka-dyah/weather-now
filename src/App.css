@@ -13,6 +13,10 @@ body {
 	margin-bottom: 30px;
 }
 
+img.weather-icon {
+	filter: drop-shadow(0 1px 3px #808080a8);
+}
+
 .data {
 	max-width: 800px;
 	margin-left: auto;

@@ -1,47 +1,106 @@
-import React, { useState } from "react";
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./City.css";
 import ModalCity from "../../components/Additional/ModalCity";
 import Loading from "../../components/Additional/Loading";
+import {
+	initializeLocation,
+	updateLocation,
+} from "../../redux/actions/location";
 
-const City = ({ isLoading, city, updateCity }) => {
-	const [isOpen, setIsOpen] = useState(false);
-	const [input, setInput] = useState(city);
-
-	const changeCity = () => {
-		updateCity(input);
-		toggleModal();
+class City extends Component {
+	state = {
+		isOpen: false,
 	};
-	const toggleModal = () => setIsOpen(!isOpen);
-	const onChangeInput = (e) => setInput(e.target.value);
 
-	return (
-		<React.Fragment>
-			<ModalCity
-				isOpen={isOpen}
-				toggleModal={toggleModal}
-				changeCity={changeCity}
-				city={input}
-				onChangeInput={onChangeInput}
-			/>
-			<div>
-				{isLoading ? (
-					<Loading isLoading={isLoading} />
-				) : (
+	componentDidMount() {
+		this.props.getInitializeLocation();
+	}
+
+	toggleModal = () => this.setState((state) => ({ isOpen: !state.isOpen }));
+
+	render() {
+		let location = "";
+		if (this.props.isLoading) {
+			location = <Loading isLoading={this.props.isLoading} />;
+		} else if (this.props.error !== null) {
+			location = (
+				<>
+					<h4 className="City">{this.props.error}</h4>
+					<i
+						onClick={this.toggleModal}
+						role="button"
+						className="fa fa-pencil ml-2"
+						aria-hidden="true"
+						style={{ fontSize: 15 }}
+					></i>
+				</>
+			);
+		} else if (this.props.city === null) {
+			location = (
+				<>
+					<ModalCity
+						isOpen={this.state.isOpen}
+						toggleModal={this.toggleModal}
+						updateCity={this.props.updateCity}
+						city=""
+					/>
 					<h4 className="City">
-						{city}
+						Enter a city
 						<i
-							onClick={changeCity}
+							onClick={this.toggleModal}
 							role="button"
 							className="fa fa-pencil ml-2"
 							aria-hidden="true"
 							style={{ fontSize: 15 }}
 						></i>
 					</h4>
-				)}
-			</div>
-		</React.Fragment>
-	);
+				</>
+			);
+		} else {
+			location = (
+				<>
+					<ModalCity
+						isOpen={this.state.isOpen}
+						toggleModal={this.toggleModal}
+						city={this.props.city.name}
+						updateCity={this.props.updateCity}
+					/>
+					<h4 className="City">
+						{this.props.city.name}
+						<i
+							onClick={this.toggleModal}
+							role="button"
+							className="fa fa-pencil ml-2"
+							aria-hidden="true"
+							style={{ fontSize: 15 }}
+						></i>
+					</h4>
+				</>
+			);
+		}
+		return (
+			<React.Fragment>
+				<div>{location}</div>
+			</React.Fragment>
+		);
+	}
+}
+
+const mapStateToProps = (state) => {
+	console.log(state);
+	return {
+		city: state.location.location,
+		isLoading: state.location.loading,
+		error: state.location.error,
+	};
 };
 
-export default City;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getInitializeLocation: () => dispatch(initializeLocation()),
+		updateCity: (location) => dispatch(updateLocation(location)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(City);

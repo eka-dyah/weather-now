@@ -3,7 +3,7 @@ import React from "react";
 import ScrollableHorizontal from "../UI/ScrollableHorizontal";
 import { Link } from "react-router-dom";
 
-const WeatherScrollable = ({ header, subheader, info, moreUrl }) => {
+const WeatherScrollable = ({ header, subheader, info, moreUrl, needMaxMin }) => {
 	return (
 		<div className="p-3 border rounded content data">
 			<div className="mb-5 mt-2">
@@ -17,7 +17,7 @@ const WeatherScrollable = ({ header, subheader, info, moreUrl }) => {
 					{subheader ? subheader : " "}
 				</h4>
 			</div>
-			<ScrollableHorizontal data={info} />
+			<ScrollableHorizontal data={info} needMaxMin={needMaxMin} />
 			<div className="text-right font-weight-bold mt-4">
 				{moreUrl ? (
 					<Link to={moreUrl} className="text-dark">

@@ -1,10 +1,13 @@
 import * as actionTypes from "./actionTypes.js";
+import { fetchWeather } from "./weather.js";
 
 export const initializeLocation = (location = null) => (dispatch) => {
 	if (!location) {
-		fetch("https://api.ipify.org/?format=json")
+		fetch("https://json.geoiplookup.io/")
 			.then((res) => res.json())
-			.then((data) => dispatch(fetchInitLocation(location, data.ip)))
+			.then((data) => {
+				dispatch(fetchInitLocation(location, data.ip));
+			})
 			.catch((errror) => dispatch(setFailedLocation(errror.message)));
 	} else {
 		dispatch(setLocation(location));
@@ -13,15 +16,16 @@ export const initializeLocation = (location = null) => (dispatch) => {
 
 export const updateLocation = (location = null) => (dispatch) => {
 	if (!location) {
-		dispatch(fetchInitLocation(location, ip));
+		dispatch(initializeLocation(location));
 	} else {
 		dispatch(fetchUpdateLocation(location));
 	}
 };
 
-export const setLoadingLocation = () => {
+export const setLoadingLocation = (loading = true) => {
 	return {
 		type: actionTypes.FETCH_LOCATION_LOADING,
+		payload: loading,
 	};
 };
 
@@ -33,6 +37,7 @@ export const setFailedLocation = (errorMessage) => {
 };
 
 export const setLocation = (location) => {
+	console.log(location);
 	return {
 		type: actionTypes.SET_LOCATION,
 		payload: location,
@@ -43,31 +48,44 @@ export const fetchUpdateLocation = (location) => (dispatch) => {
 	dispatch(setLoadingLocation());
 	fetch("http://localhost:8000/location/update", {
 		method: "POST",
-		body: JSON.stringify({
-			loc: location,
-		}),
 		headers: {
 			"Content-Type": "application/json",
 		},
+		body: JSON.stringify({
+			loc: location,
+		}),
 	})
-		.then((res) => res.json())
-		.then((data) => dispatch(setLocation(data)))
+		.then((res) => {
+			dispatch(setLoadingLocation(false));
+			return res.json();
+		})
+		.then((data) => {
+			dispatch(setLocation(data.location));
+			dispatch(fetchWeather(data.location.lat, data.location.lon));
+		})
 		.catch((error) => dispatch(setFailedLocation(error.message)));
 };
 
-export const fetchInitLocation = (location, ip) => (dispatch) => {
+export const fetchInitLocation = (location = null, ipAddress) => (dispatch) => {
 	dispatch(setLoadingLocation());
+	console.log(ipAddress, typeof ipAddress);
 	fetch("http://localhost:8000/location", {
 		method: "POST",
-		body: JSON.stringify({
-			loc: location,
-			ip,
-		}),
 		headers: {
 			"Content-Type": "application/json",
 		},
+		body: JSON.stringify({
+			loc: location,
+			ip: ipAddress,
+		}),
 	})
-		.then((res) => res.json())
-		.then((data) => dispatch(setLocation(data)))
+		.then((res) => {
+			dispatch(setLoadingLocation(false));
+			return res.json();
+		})
+		.then((data) => {
+			dispatch(setLocation(data.location));
+			dispatch(fetchWeather(data.location.lat, data.location.lon));
+		})
 		.catch((error) => dispatch(setFailedLocation(error.message)));
 };

@@ -2,7 +2,8 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 
-import { locationReducer } from "./redux/reducers/location";
+import { locationReducer } from "./reducers/location";
+import { weatherReducer } from "./reducers/weather";
 
 const composeEnhancers =
 	process.env.NODE_ENV === "development"
@@ -10,14 +11,16 @@ const composeEnhancers =
 		: null || compose;
 
 const loggerMiddleware = createLogger();
-const rootReducer = combineReducers({
-    location: locationReducer
-})
+console.log(locationReducer);
 
-export default function configureStore(preloadedState) {
+const rootReducer = combineReducers({
+	location: locationReducer,
+	weather: weatherReducer
+});
+
+export default function configureStore() {
 	return createStore(
 		rootReducer,
-        preloadedState,
         composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
 	);
 }
