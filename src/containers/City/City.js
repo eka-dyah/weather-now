@@ -7,6 +7,7 @@ import {
 	initializeLocation,
 	updateLocation,
 } from "../../redux/actions/location";
+import { fetchWeather } from "../../redux/actions/weather";
 
 class City extends Component {
 	state = {
@@ -14,7 +15,12 @@ class City extends Component {
 	};
 
 	componentDidMount() {
-		this.props.getInitializeLocation();
+		if (this.props.city) {
+			const { lat, lon } = this.props.city;
+			this.props.getWeatherData(lat, lon);
+		} else {
+			this.props.getInitializeLocation();
+		}
 	}
 
 	toggleModal = () => this.setState((state) => ({ isOpen: !state.isOpen }));
@@ -26,6 +32,12 @@ class City extends Component {
 		} else if (this.props.error !== null) {
 			location = (
 				<>
+					<ModalCity
+						isOpen={this.state.isOpen}
+						toggleModal={this.toggleModal}
+						updateCity={this.props.updateCity}
+						city=""
+					/>
 					<h4 className="City">{this.props.error}</h4>
 					<i
 						onClick={this.toggleModal}
@@ -100,6 +112,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		getInitializeLocation: () => dispatch(initializeLocation()),
 		updateCity: (location) => dispatch(updateLocation(location)),
+		getWeatherData: (lat, lon) => dispatch(fetchWeather(lat, lon)),
 	};
 };
 

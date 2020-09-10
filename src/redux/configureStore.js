@@ -15,12 +15,34 @@ console.log(locationReducer);
 
 const rootReducer = combineReducers({
 	location: locationReducer,
-	weather: weatherReducer
+	weather: weatherReducer,
 });
 
-export default function configureStore() {
-	return createStore(
-		rootReducer,
-        composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
-	);
-}
+const saveToLocalStorage = (state) => {
+	try {
+		const stringifyState = JSON.stringify(state);
+		localStorage.setItem("reduxState", stringifyState);
+	} catch (error) {
+		console.warn(error);
+	}
+};
+
+const loadFromLocalStorage = () => {
+	try {
+		const locationState = localStorage.getItem("reduxState");
+		if (!locationState) return undefined;
+		return JSON.parse(locationState);
+	} catch (error) {
+		return undefined;
+	}
+};
+
+const store = createStore(
+	rootReducer,
+	loadFromLocalStorage(),
+	composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
+);
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
+
+export default store;
