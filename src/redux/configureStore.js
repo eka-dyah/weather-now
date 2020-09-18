@@ -6,13 +6,13 @@ import { locationReducer } from "./reducers/location";
 import { weatherReducer } from "./reducers/weather";
 
 let composeEnhancers;
-let loggerMiddleware;
+let middleware;
 if (process.env.NODE_ENV === "development") {
 	composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-	loggerMiddleware = createLogger();
+	middleware = [thunkMiddleware, createLogger()];
 } else {
 	composeEnhancers = null || compose;
-	loggerMiddleware = null;
+	middleware = [thunkMiddleware];
 }
 
 const rootReducer = combineReducers({
@@ -42,7 +42,7 @@ const loadFromLocalStorage = () => {
 const store = createStore(
 	rootReducer,
 	loadFromLocalStorage(),
-	composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
+	composeEnhancers(applyMiddleware(...middleware))
 );
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
