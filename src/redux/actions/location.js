@@ -45,7 +45,7 @@ export const setLocation = (location) => {
 
 export const fetchUpdateLocation = (location) => (dispatch) => {
 	dispatch(setLoadingLocation());
-	fetch("http://localhost:8000/location/update", {
+	fetch(process.env.REACT_APP_BACKEND_URL + "/location/update", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const fetchUpdateLocation = (location) => (dispatch) => {
 
 export const fetchInitLocation = (location = null, ipAddress) => (dispatch) => {
 	dispatch(setLoadingLocation());
-	fetch("http://localhost:8000/location", {
+	fetch(process.env.REACT_APP_BACKEND_URL + "/location", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

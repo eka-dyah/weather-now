@@ -9,7 +9,7 @@ export const setWeather = (weather) => {
 
 export const fetchWeather = (lat, lon) => (dispatch) => {
 	dispatch(weatherLoading(true));
-	fetch("http://localhost:8000/current", {
+	fetch(process.env.REACT_APP_BACKEND_URL + "/current", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
