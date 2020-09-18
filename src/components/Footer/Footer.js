@@ -17,7 +17,7 @@ const Footer = () => (
 			style={{ fontSize: 12 }}
 		>
 			<p className="mb-0">Made by Dyah Eka Lestari, 2020</p>
-			<p className="my-0">Weather data by <a className="text-white-50" target="_blank" href="https://openweathermap.org/">OpenWeather</a></p>
+			<p className="my-0">Weather data by <a className="text-white-50" target="_blank" rel="noopener noreferrer" href="https://openweathermap.org/">OpenWeather</a></p>
 		</div>
 	</div>
 );
