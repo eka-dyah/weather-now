@@ -1,5 +1,3 @@
-import React from "react";
-
 import ScrollableHorizontal from "../UI/ScrollableHorizontal";
 import { Link } from "react-router-dom";
 

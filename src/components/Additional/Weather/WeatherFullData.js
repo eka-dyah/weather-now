@@ -1,4 +1,3 @@
-import React from "react";
 import WeatherInfo from "./WeatherInfo";
 
 const WeatherFullData = ({weather, subweather, info, dateTime, imgSrc}) => (

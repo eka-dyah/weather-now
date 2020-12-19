@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 import "./ScrollableHorizontal.css";
 
@@ -28,7 +28,7 @@ const ScrollableHorizontal = ({ data, needMaxMin }) => {
 					/>
 				</div>
 				{needMaxMin ? (
-					<React.Fragment>
+					<>
 						<h6 className="text-center">
 							{weather.info[2].value}
 							<sup>o</sup>
@@ -37,7 +37,7 @@ const ScrollableHorizontal = ({ data, needMaxMin }) => {
 							{weather.info[3].value}
 							<sup>o</sup>
 						</h6>
-					</React.Fragment>
+					</>
 				) : (
 					<h6 className="text-center">
 						{weather.info[0].value}

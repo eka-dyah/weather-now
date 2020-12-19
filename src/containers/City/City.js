@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
 import "./City.css";
 import ModalCity from "../../components/Additional/ModalCity";
@@ -92,9 +92,9 @@ class City extends Component {
 			);
 		}
 		return (
-			<React.Fragment>
+			<>
 				<div>{location}</div>
-			</React.Fragment>
+			</>
 		);
 	}
 }

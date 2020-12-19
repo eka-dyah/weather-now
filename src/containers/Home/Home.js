@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import WeatherInfo from "../../components/Additional/Weather/WeatherInfo";
 import WeatherScrollable from "../../components/Additional/Weather/WeatherScrollable";
 import Loading from "../../components/Additional/Loading";

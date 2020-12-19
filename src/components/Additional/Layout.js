@@ -1,4 +1,3 @@
-import React from "react";
 import Navigation from "../../containers/Navigation/Navigation";
 import Footer from "../Footer/Footer";
 import City from "../../containers/City/City";

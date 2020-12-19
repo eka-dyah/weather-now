@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import Forecast from "../../components/Additional/Forecast/Forecast";
 import { connect } from "react-redux";
 import Loading from "../../components/Additional/Loading";

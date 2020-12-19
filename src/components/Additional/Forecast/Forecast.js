@@ -1,4 +1,3 @@
-import React from "react";
 import WeatherFullData from "../Weather/WeatherFullData";
 
 const Forecast = ({ header, subheader, info }) => {

@@ -1,14 +1,14 @@
-import React, { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Layout from "./components/Additional/Layout";
 import Loading from "./components/Additional/Loading";
 
-const Home = React.lazy(() => import("./containers/Home/Home"));
-const Today = React.lazy(() => import("./containers/Today/Today"));
-const Tomorrow = React.lazy(() => import("./containers/Tomorrow/Tomorrow"));
-const Daily = React.lazy(() => import("./containers/Daily/Daily"));
+const Home = lazy(() => import("./containers/Home/Home"));
+const Today = lazy(() => import("./containers/Today/Today"));
+const Tomorrow = lazy(() => import("./containers/Tomorrow/Tomorrow"));
+const Daily = lazy(() => import("./containers/Daily/Daily"));
 
 const routes = [
 	{ exact: true, path: "/", Component: Home },
@@ -40,7 +40,7 @@ function App() {
 	));
 
 	return (
-		<React.Fragment>
+		<>
 			<BrowserRouter>
 				<Layout>
 					<Suspense fallback={<div><Loading /></div>}>
@@ -51,7 +51,7 @@ function App() {
 					</Suspense>
 				</Layout>
 			</BrowserRouter>
-		</React.Fragment>
+		</>
 	);
 }
 
